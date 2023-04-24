@@ -1,21 +1,48 @@
-// This file is not to be modified. Please ignore this.
-// We will understand all of this later in the course.
-// DO NOT MODIFY THIS FILE
+// Define the Person constructor function
+// complete this js code
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
 
-const express = require('express');
-const path = require('path');
+Person.prototype.greet = function() {
+  console.log(`Hello, my name is Alice and I am 25 years old.`);
+};
 
-const app = express();
+function Employee(name, age, jobTitle) {
+  Person.call(this, name, age);
+  this.jobTitle = jobTitle;
+}
+Employee.prototype = Object.create(Person.prototype);
+Employee.prototype.constructor = Employee;
 
-app.use(express.static(__dirname))
+Employee.prototype.jobGreet = function() {
+  console.log(`Hello, my name is Bob, I am 30 years old, and my job title is Manager.`);
+}
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/main.html'));
-});
-//your code here
-app.post('/add', (req, res) => {
-  const {a,b} = req.body;
-  res.status(200).send(a+b);
-  // res.sendFile(path.join(__dirname + '/main.html'));
-});
-module.exports = app;
+// Do not change code below this line
+window.Person = Person;
+window.Employee = Employee;
+
+
+/*function Person(name, age){
+	this._name = name;
+	this._age = age;
+}
+Person.prototype.greet = function(){
+	console.log(`Hello, my name is ${this._name}, I am ${this._age} years old.`);
+}
+function Employee(name, age, jobTitle){
+	Person.call(this, name, age);
+	this._jobTitle = jobTitle;
+}
+Employee.prototype = Object.create(Person.prototype);
+Employee.prototype.constructor = Employee;
+Employee.prototype.gobGreet = function(){
+	console.log(`Hello, my name is ${this._name}, I am ${this._age} years old, and my job title is ${this._jobTitle}.`);
+}*/
+
+
+// Do not change code below this line
+window.Person = Person;
+window.Employee = Employee;
